@@ -1,13 +1,12 @@
 import requests
 
-url_London = 'http://wttr.dvmn.org/London?nTqu&lang=en'
-url_Cherepovets = 'http://wttr.dvmn.org/Cherepovets?nTMq&lang=ru'
-url_Sheremetyevo_airport = 'http://wttr.dvmn.org/Sheremetyevo+airport?nTMq&lang=ru'
+urls = ['http://wttr.dvmn.org/London', 'http://wttr.dvmn.org/Cherepovets', 'http://wttr.dvmn.org/Sheremetyevo+airport']
+payload = {'lang': 'ru', 'nTqu': ''}
 
-response_London = requests.get(url_London)
-response_Cherepovets = requests.get(url_Cherepovets)
-response_Sheremetyevo_airport = requests.get(url_Sheremetyevo_airport)
-
-print(response_London.text)
-print(response_Cherepovets.text)
-print(response_Sheremetyevo_airport.text)
+for url in urls:
+    try:
+        response = requests.get(url, params=payload)
+        response.raise_for_status()
+        print(response.text)
+    except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
+        print('Something went wrong, please try again later')
