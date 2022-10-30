@@ -1,12 +1,13 @@
 import requests
 
-urls = ['http://wttr.dvmn.org/London', 'http://wttr.dvmn.org/Cherepovets', 'http://wttr.dvmn.org/Sheremetyevo+airport']
-payload = {'lang': 'ru', 'nTqu': ''}
+locations = ['London', 'Cherepovets', 'Sheremetyevo airport']
+payload = {'lang': 'ru', 'MnTqu': ''}
 
-for url in urls:
+for location in locations:
     try:
-        response = requests.get(url, params=payload)
+        response = requests.get('http://wttr.dvmn.org/'+location, params=payload)
         response.raise_for_status()
         print(response.text)
     except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError):
         print('Something went wrong, please try again later')
+    
