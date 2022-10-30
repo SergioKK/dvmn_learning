@@ -1,7 +1,7 @@
 import requests
 
 locations = ['London', 'Cherepovets', 'Sheremetyevo airport']
-payload = {'lang': 'ru', 'MnTqu': ''}
+payload = {'nTqM': '', 'lang': 'ru'}
 
 for location in locations:
     try:
